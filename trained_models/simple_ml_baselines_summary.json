@@ -1,0 +1,83 @@
+[
+  {
+    "model_name": "RandomForest_Sentinel1_Only",
+    "data_config": "Sentinel1_Only",
+    "ml_algorithm": "RandomForest",
+    "val_accuracy": 1.0,
+    "val_f1": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "LogisticRegression_Sentinel1_Only",
+    "data_config": "Sentinel1_Only",
+    "ml_algorithm": "LogisticRegression",
+    "val_accuracy": 0.8333333333333334,
+    "val_f1": 0.9090909090909091,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "KNN_Sentinel1_Only",
+    "data_config": "Sentinel1_Only",
+    "ml_algorithm": "KNN",
+    "val_accuracy": 0.8333333333333334,
+    "val_f1": 0.9090909090909091,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "RandomForest_Sentinel2_Only",
+    "data_config": "Sentinel2_Only",
+    "ml_algorithm": "RandomForest",
+    "val_accuracy": 0.8333333333333334,
+    "val_f1": 0.9090909090909091,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "LogisticRegression_Sentinel2_Only",
+    "data_config": "Sentinel2_Only",
+    "ml_algorithm": "LogisticRegression",
+    "val_accuracy": 1.0,
+    "val_f1": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "KNN_Sentinel2_Only",
+    "data_config": "Sentinel2_Only",
+    "ml_algorithm": "KNN",
+    "val_accuracy": 0.8333333333333334,
+    "val_f1": 0.9090909090909091,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "RandomForest_Combined_Data",
+    "data_config": "Combined_Data",
+    "ml_algorithm": "RandomForest",
+    "val_accuracy": 1.0,
+    "val_f1": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "LogisticRegression_Combined_Data",
+    "data_config": "Combined_Data",
+    "ml_algorithm": "LogisticRegression",
+    "val_accuracy": 1.0,
+    "val_f1": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0
+  },
+  {
+    "model_name": "KNN_Combined_Data",
+    "data_config": "Combined_Data",
+    "ml_algorithm": "KNN",
+    "val_accuracy": 0.8333333333333334,
+    "val_f1": 0.9090909090909091,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "model_name": "KNN_Sentinel1_Only",
+  "model_type": "SimpleKNN",
+  "train_metrics": {
+    "accuracy": 0.9,
+    "precision": 0.9,
+    "recall": 1.0,
+    "f1": 0.9473684210526316
+  },
+  "val_metrics": {
+    "accuracy": 0.8333333333333334,
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1": 0.9090909090909091
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "deep_learning_results": [],
+  "machine_learning_results": [
+    {
+      "model_name": "RandomForest_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "Sentinel1",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "Sentinel1",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "Sentinel1",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "RandomForest_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "Sentinel2",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "Sentinel2",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "Sentinel2",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "RandomForest_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "CombinedData",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "CombinedData",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "CombinedData",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    }
+  ],
+  "all_results_sorted": [
+    {
+      "model_name": "RandomForest_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "Sentinel1",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "Sentinel2",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "RandomForest_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "CombinedData",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "CombinedData",
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "model_name": "LogisticRegression_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "LogisticRegression",
+      "data_source": "Sentinel1",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Sentinel1_Only",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "Sentinel1",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "RandomForest_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "RandomForest",
+      "data_source": "Sentinel2",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Sentinel2_Only",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "Sentinel2",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    },
+    {
+      "model_name": "KNN_Combined_Data",
+      "model_type": "Machine Learning",
+      "architecture": "KNN",
+      "data_source": "CombinedData",
+      "accuracy": 0.8333333333333334,
+      "f1": 0.9090909090909091,
+      "precision": 0.8333333333333334,
+      "recall": 1.0
+    }
+  ],
+  "summary_statistics": {
+    "dl_count": 0,
+    "ml_count": 9,
+    "dl_best_accuracy": 0,
+    "ml_best_accuracy": 1.0,
+    "dl_avg_accuracy": 0,
+    "ml_avg_accuracy": 0.9074074074074073
+  }
+}
