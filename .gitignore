@@ -28,8 +28,22 @@ MANIFEST
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Environment variables
+# Environment variables / secrets
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+**/credentials.json
+**/serviceAccount*.json
+**/secrets/
+**/secret/
+.aws/
+.config/gcloud/
+
 .venv
 env/
 venv/
