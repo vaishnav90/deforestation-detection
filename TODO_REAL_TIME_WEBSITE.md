@@ -52,32 +52,33 @@
 
 ## 🚧 **TODO (What Needs to Be Done for Real-Time Website)**
 
-### **Phase 1: Core Inference Infrastructure** 🔴 **PRIORITY**
+### **Phase 1: Core Inference Infrastructure** ✅ **DONE**
 
 #### 1. **Model Inference Script**
-   - [ ] Create `inference.py` script to load trained models
-   - [ ] Implement function to process single satellite images
-   - [ ] Handle image preprocessing (normalization, resizing, tiling for large images)
-   - [ ] Generate deforestation predictions and confidence scores
-   - [ ] Save prediction masks as GeoTIFF with proper georeferencing
+   - [x] Create `inference.py` script to load trained models
+   - [x] Implement function to process single satellite images
+   - [x] Handle image preprocessing (normalization, resizing, tiling for large images)
+   - [x] Generate deforestation predictions and confidence scores
+   - [x] Save prediction masks as GeoTIFF with proper georeferencing
 
-#### 2. **REST API Backend** 🔴 **CRITICAL**
-   - [ ] Choose framework: **FastAPI** (recommended) or Flask
-   - [ ] Create API endpoint: `POST /api/v1/predict`
+#### 2. **REST API Backend** ✅ **DONE**
+   - [x] Choose framework: **FastAPI**
+   - [x] Create API endpoint: `POST /api/v1/predict`
      - Accept: Satellite image upload (Sentinel-1, Sentinel-2, or both)
      - Return: JSON with prediction results, mask download URL, confidence scores
-   - [ ] Create API endpoint: `GET /api/v1/models`
+   - [x] Create API endpoint: `GET /api/v1/models`
      - List available trained models
+   - [x] Create API endpoint: `POST /api/v1/predict/demo` (demo patches)
    - [ ] Create API endpoint: `POST /api/v1/predict/batch`
      - Process multiple images
-   - [ ] Model loading and caching mechanism (load models once, reuse)
-   - [ ] Error handling and validation for image inputs
+   - [x] Model loading and caching mechanism (load models once, reuse)
+   - [x] Error handling and validation for image inputs
 
 #### 3. **Image Processing Pipeline**
-   - [ ] Handle large images (tile into smaller patches, process, reassemble)
-   - [ ] Support multiple input formats (GeoTIFF, PNG, JPEG)
-   - [ ] Maintain geospatial metadata (CRS, bounds, transform)
-   - [ ] Image normalization matching training pipeline
+   - [x] Handle large images (tile into smaller patches, process, reassemble)
+   - [x] Support GeoTIFF input (PNG/JPEG still TODO)
+   - [x] Maintain geospatial metadata (CRS, bounds, transform)
+   - [x] Image normalization matching training pipeline
    - [ ] Progress tracking for large image processing
 
 ---
@@ -100,27 +101,26 @@
 
 ### **Phase 3: Frontend Web Application** 🟡 **HIGH PRIORITY**
 
-#### 6. **Web Interface**
-   - [ ] Choose framework: **React**, **Vue.js**, or vanilla HTML/JS
-   - [ ] Create main dashboard page
-   - [ ] Image upload component (drag & drop)
+#### 6. **Web Interface** ✅ **MVP DONE**
+   - [x] Choose framework: vanilla HTML/JS (`static/`)
+   - [x] Create main dashboard page (CanopyWatch)
+   - [x] Image upload component
    - [ ] Region selection tool (draw polygon on map)
-   - [ ] Results display area
+   - [x] Results display area
 
 #### 7. **Interactive Map**
-   - [ ] Integrate **Leaflet.js** or **Mapbox** for map visualization
-   - [ ] Display base satellite imagery
-   - [ ] Overlay deforestation predictions as colored masks
+   - [x] Integrate **Leaflet.js** for map visualization
+   - [x] Display prediction overlay on map
    - [ ] Layer controls (toggle predictions, satellite imagery)
-   - [ ] Zoom, pan, and coordinate display
+   - [x] Zoom, pan
    - [ ] Draw ROI polygons for area selection
 
 #### 8. **Visualization Components**
-   - [ ] Display deforestation mask overlay on map
-   - [ ] Color-coded confidence scores
+   - [x] Display deforestation mask overlay
+   - [x] Heatmap confidence visualization
    - [ ] Before/after comparison slider
-   - [ ] Statistics panel (deforestation area, percentage, confidence)
-   - [ ] Download buttons for masks and reports
+   - [x] Statistics panel (deforestation area, percentage, confidence)
+   - [x] Download buttons for masks and heatmaps
 
 ---
 
@@ -245,6 +245,6 @@
 
 ---
 
-**Last Updated**: 2024
-**Status**: Core ML models complete ✅ | Web infrastructure needed 🚧
+**Last Updated**: 2026-07-10
+**Status**: Core ML models ✅ | Inference + FastAPI + web UI MVP ✅ | Real-time satellite fetch / cloud deploy still TODO
 

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CanopyWatch — Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>:root {
+      --bg: #0c1612;
+      --panel: #12241c;
+      --line: rgba(140, 190, 150, 0.22);
+      --text: #e8f2ea;
+      --muted: #9bb5a4;
+      --accent: #7dce8a;
+      --warn: #e8a045;
+      --danger: #e85a4f;
+      --display: "Fraunces", Georgia, serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      background: var(--bg); color: var(--text);
+      font-family: var(--body);
+      overflow: hidden;
+    }
+    .deck { height: 100%; position: relative; }
+    .slide {
+      display: none;
+      height: 100%;
+      padding: 3.5rem 4.5rem 5rem;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(63,168,90,0.18), transparent 45%),
+        radial-gradient(ellipse at 90% 80%, rgba(20,60,40,0.5), transparent 40%),
+        var(--bg);
+    }
+    .slide.active { display: flex; animation: in 0.35s ease; }
+    @keyframes in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+    .eyebrow {
+      color: var(--accent); font-size: 0.9rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.75rem;
+    }
+    h1 {
+      font-family: var(--display); font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.08; margin: 0 0 1rem; letter-spacing: -0.03em;
+      max-width: 16ch;
+    }
+    h2 {
+      font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin: 0 0 1.25rem; letter-spacing: -0.02em;
+    }
+    h3 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+    .lede { color: var(--muted); font-size: 1.2rem; max-width: 42rem; line-height: 1.5; margin: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card {
+      background: rgba(18,36,28,0.85); border: 1px solid var(--line);
+      border-radius: 16px; padding: 1.1rem 1.2rem;
+    }
+    .card p { margin: 0; color: var(--muted); line-height: 1.45; font-size: 0.98rem; }
+    .stat {
+      font-family: var(--display); font-size: 2.4rem; color: var(--accent); margin: 0.2rem 0;
+    }
+    .stat-label { color: var(--muted); font-size: 0.85rem; }
+    ul { margin: 0; padding-left: 1.2rem; color: var(--muted); line-height: 1.55; }
+    li { margin-bottom: 0.45rem; }
+    li strong { color: var(--text); }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 0.95rem;
+    }
+    th, td {
+      text-align: left; padding: 0.55rem 0.45rem;
+      border-bottom: 1px solid var(--line);
+    }
+    th { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr.best td { color: var(--accent); font-weight: 600; }
+    tr.mid td:first-child { color: var(--warn); }
+    .pill {
+      display: inline-block; padding: 0.2rem 0.55rem; border-radius: 999px;
+      background: rgba(125,206,138,0.14); color: var(--accent); font-size: 0.75rem; font-weight: 600;
+    }
+    .pill.warn { background: rgba(232,160,69,0.16); color: var(--warn); }
+    .pill.danger { background: rgba(232,90,79,0.16); color: #ff9d95; }
+    .footer-bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 1.5rem; background: rgba(0,0,0,0.45);
+      border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--muted);
+      backdrop-filter: blur(8px); z-index: 5;
+    }
+    .footer-bar button {
+      background: rgba(125,206,138,0.12); border: 1px solid var(--line);
+      color: var(--text); border-radius: 8px; padding: 0.4rem 0.7rem;
+      cursor: pointer; font: inherit;
+    }
+    .notes {
+      position: fixed; right: 1rem; bottom: 3.5rem; width: min(360px, 40vw);
+      max-height: 40vh; overflow: auto; background: rgba(8,16,12,0.95);
+      border: 1px solid var(--line); border-radius: 12px; padding: 0.85rem 1rem;
+      font-size: 0.82rem; color: var(--muted); line-height: 1.4; display: none; z-index: 6;
+    }
+    .notes.visible { display: block; }
+    .notes strong { color: var(--accent); }
+    .title-meta { margin-top: 2rem; color: var(--muted); font-size: 0.95rem; }
+    .demo-steps { counter-reset: step; }
+    .demo-steps li { list-style: none; margin-left: -1.2rem; padding-left: 2.2rem; position: relative; }
+    .demo-steps li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 0; top: 0;
+      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      background: rgba(125,206,138,0.2); color: var(--accent);
+      display: grid; place-items: center; font-size: 0.8rem; font-weight: 700;
+    }
+    .quote {
+      font-family: var(--display); font-size: 1.6rem; line-height: 1.35;
+      max-width: 28ch; margin: 0;
+    }
+    a { color: var(--accent); }
+    @media (max-width: 900px) {
+      .slide { padding: 2rem 1.25rem 4.5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .notes { width: calc(100% - 2rem); right: 1rem; }
+    }
+</style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    
+    <section class="slide active" data-notes="Open with the stakes, not the tech. One sentence: forests disappear faster than we can monitor them on the ground. Then introduce CanopyWatch as an AI system that reads satellite radar + optical imagery.">
+      <p class="eyebrow">CanopyWatch</p>
+      <h1>Detecting deforestation from space with AI</h1>
+      <p class="lede">
+        A multi-model system that scores Sentinel-1 radar and Sentinel-2 optical patches
+        for forest loss — with a live web demo you can run today.
+      </p>
+      <p class="title-meta">Deforestation Detection Project · Demo presentation</p>
+    </section>
+
+    
+    <section class="slide" data-notes="Ask the room: how would you know a remote clearing happened last week? Ground surveys are slow and expensive. Satellites revisit often — but humans cannot inspect every pixel.">
+      <p class="eyebrow">The problem</p>
+      <h2>Forest loss is fast. Manual monitoring is not.</h2>
+      <div class="grid-3" style="margin-top:1rem">
+        <div class="card">
+          <h3>Scale</h3>
+          <p>Tropical forests span millions of km². Clearings can appear between two satellite passes.</p>
+        </div>
+        <div class="card">
+          <h3>Weather</h3>
+          <p>Clouds hide optical imagery for weeks. Radar still sees the ground through cloud cover.</p>
+        </div>
+        <div class="card">
+          <h3>Need</h3>
+          <p>Automated, repeatable scoring of patches so analysts focus on the highest-risk areas.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="Explain the two sensors simply: S2 is like a camera (color + near-IR). S1 is like a flashlight that works in the dark and through clouds (radar backscatter).">
+      <p class="eyebrow">Data</p>
+      <h2>Two eyes on the same forest</h2>
+      <div class="grid-2" style="margin-top:0.5rem">
+        <div class="card">
+          <span class="pill">Sentinel-2 · Optical</span>
+          <h3 style="margin-top:0.75rem">RGB + Near-Infrared</h3>
+          <p>4 bands. Captures vegetation color and structure. Best when skies are clear.</p>
+        </div>
+        <div class="card">
+          <span class="pill warn">Sentinel-1 · Radar</span>
+          <h3 style="margin-top:0.75rem">VV + VH polarizations</h3>
+          <p>2 bands. Works day/night and through clouds. Sensitive to surface roughness and canopy structure.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <p><strong style="color:var(--text)">Our demo dataset:</strong> 16 cloud-free grid patches (2816×2816 px each) with binary deforestation masks. Label rule: &gt;10% deforested pixels ⇒ positive class.</p>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="This is the architecture slide. Emphasize we built both classical ML baselines AND deep CNNs so the story is comparative, not just 'we trained a neural net'.">
+      <p class="eyebrow">Approach</p>
+      <h2>Baselines + deep models, same task</h2>
+      <div class="grid-2">
+        <div class="card">
+          <span class="pill warn">Classical ML</span>
+          <ul style="margin-top:0.75rem">
+            <li><strong>Random Forest</strong> — ensemble on band statistics</li>
+            <li><strong>Logistic Regression</strong> — linear, interpretable</li>
+            <li><strong>KNN</strong> — instance-based baseline</li>
+          </ul>
+          <p style="margin-top:0.75rem">Features: mean, std, percentiles, min/max per band.</p>
+        </div>
+        <div class="card">
+          <span class="pill">Deep Learning</span>
+          <ul style="margin-top:0.75rem">
+            <li><strong>Simple CNN</strong> — S1-only or S2-only</li>
+            <li><strong>Late Fusion CNN</strong> — separate S1/S2 branches, fuse late</li>
+            <li><strong>Robust Baseline CNN</strong> — residual blocks</li>
+          </ul>
+          <p style="margin-top:0.75rem">Patch-level probability via global pooling (not pixel U-Net).</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="CRITICAL honesty slide. Do NOT claim production accuracy. Say: with 16 patches, binary F1 saturates. Majority baseline is already ~91%. Correlation with continuous rate is what actually ranks models.">
+      <p class="eyebrow">Evaluation honesty</p>
+      <h2>Why “100% F1” would be a bad slide</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="stat">14 / 16</div>
+          <div class="stat-label">patches labeled “deforested”</div>
+          <p style="margin-top:0.75rem">Always predicting deforestation already gets ~90.9% Val F1. Binary metrics look great even when the model barely ranks severity.</p>
+        </div>
+        <div class="card">
+          <div class="stat">n = 6</div>
+          <div class="stat-label">held-out validation patches</div>
+          <p style="margin-top:0.75rem">We report <strong style="color:var(--text)">correlation with continuous deforestation rate</strong> as the primary ranking signal — does the score track how much forest was lost?</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="Walk top to bottom. Star the Simple CNN S2. Point out Late Fusion is strong multi-modal. Point out models at 90.9% F1 ≈ majority baseline. RF is competitive and fast.">
+      <p class="eyebrow">Results · held-out val</p>
+      <h2>Model leaderboard</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Family</th>
+            <th>Corr. w/ rate</th>
+            <th>Val F1</th>
+            <th>vs majority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="best"><td>Simple CNN (Sentinel-2) ★</td><td>DL</td><td>0.97</td><td>100%</td><td>beats</td></tr>
+          <tr><td>Random Forest (S2 stats)</td><td>ML</td><td>0.90</td><td>100%</td><td>beats</td></tr>
+          <tr><td>Random Forest (S1+S2)</td><td>ML</td><td>0.88</td><td>100%</td><td>beats</td></tr>
+          <tr><td>Logistic Regression (S1+S2)</td><td>ML</td><td>0.77</td><td>100%</td><td>beats</td></tr>
+          <tr class="mid"><td>Late Fusion CNN (S1+S2)</td><td>DL</td><td>0.75</td><td>90.9%</td><td>≈ majority</td></tr>
+          <tr class="mid"><td>Simple CNN (Sentinel-1)</td><td>DL</td><td>0.74</td><td>90.9%</td><td>≈ majority</td></tr>
+          <tr class="mid"><td>KNN (S1+S2)</td><td>ML</td><td>0.73</td><td>90.9%</td><td>≈ majority</td></tr>
+          <tr class="mid"><td>Robust Baseline CNN</td><td>DL</td><td>0.50</td><td>90.9%</td><td>≈ majority</td></tr>
+        </tbody>
+      </table>
+      <p class="lede" style="margin-top:1rem;font-size:0.95rem">Majority baseline Val F1 ≈ 90.9%. Correlation is the story.</p>
+    </section>
+
+    
+    <section class="slide" data-notes="Three takeaways only. Don't overclaim. Optical CNN ranks severity best. Classical ML is surprisingly strong on stats. Radar is the insurance policy for cloudy regions.">
+      <p class="eyebrow">What we learned</p>
+      <h2>Three takeaways</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="stat">01</div>
+          <h3>Optical ranks severity</h3>
+          <p>Simple CNN on Sentinel-2 tracks continuous loss rate best (corr 0.97).</p>
+        </div>
+        <div class="card">
+          <div class="stat">02</div>
+          <h3>Classical ML still matters</h3>
+          <p>Random Forest on band stats is fast, strong, and easy to explain on a slide.</p>
+        </div>
+        <div class="card">
+          <div class="stat">03</div>
+          <h3>Radar is the backup</h3>
+          <p>S1-only CNN works when clouds kill optical — critical for operational monitoring.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="System slide before live demo. Mention FastAPI, calibrated thresholds, tiling for heatmaps, Compare tab for side-by-side models.">
+      <p class="eyebrow">System</p>
+      <h2>From weights to a working product</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Backend</h3>
+          <ul>
+            <li>FastAPI inference server</li>
+            <li>8 models loaded &amp; cached</li>
+            <li>Per-model calibrated thresholds</li>
+            <li>Tiled heatmaps + GeoTIFF masks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Frontend · CanopyWatch</h3>
+          <ul>
+            <li>Leaderboard with honest metrics</li>
+            <li><strong>Compare models</strong> on one patch</li>
+            <li>Single-model demo + GeoTIFF upload</li>
+            <li>Heatmap / preview / map views</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lede" style="margin-top:1rem;font-size:1rem">Live app: <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a></p>
+    </section>
+
+    
+    <section class="slide" data-notes="THIS IS YOUR LIVE DEMO SCRIPT. Switch to the app window. Follow the numbered steps. Patch 7 = heavy loss. Patch 0 = intact. Narrate as results appear.">
+      <p class="eyebrow">Live demo script</p>
+      <h2>What to click (2–3 minutes)</h2>
+      <ol class="demo-steps" style="color:var(--muted); line-height:1.55">
+        <li><strong style="color:var(--text)">Open</strong> <a href="http://127.0.0.1:8000" target="_blank">CanopyWatch</a> — show the leaderboard ranked by correlation.</li>
+        <li><strong style="color:var(--text)">Compare models</strong> on <strong style="color:var(--text)">Patch 7</strong> (≈78% ground-truth loss). Expect most/all models to flag deforestation.</li>
+        <li>Point at the side-by-side scores: CNN vs Random Forest vs Logistic vs KNN.</li>
+        <li>Optional: compare <strong style="color:var(--text)">Patch 0</strong> (≈3% loss / intact) — show true negatives.</li>
+        <li>Optional: Single model → Simple CNN (S2) → show heatmap overlay.</li>
+      </ol>
+    </section>
+
+    
+    <section class="slide" data-notes="Talking points while Patch 7 compare runs (it can take ~30-60s on CPU). Fill the silence with these bullets.">
+      <p class="eyebrow">While the demo runs</p>
+      <h2>Fill time with these lines</h2>
+      <ul>
+        <li><strong>Late Fusion</strong> processes radar and optical in separate branches, then merges — useful when one modality is degraded.</li>
+        <li><strong>Calibrated thresholds</strong> matter: raw CNN scores were compressed; without calibration, Late Fusion looked weak at 0.5.</li>
+        <li><strong>Heatmaps</strong> come from tiling the patch classifier — spatial visualization, not a full segmentation U-Net.</li>
+        <li>On CPU, multi-model compare takes under a minute — say so before you click.</li>
+      </ul>
+    </section>
+
+    
+    <section class="slide" data-notes="Limitations build trust. Say them confidently. Small n, class imbalance, patch-level not pixel-level, Amazon-region demo data only.">
+      <p class="eyebrow">Limitations</p>
+      <h2>What this is — and isn’t</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Is</h3>
+          <ul>
+            <li>A working end-to-end detector demo</li>
+            <li>A fair DL vs classical ML comparison</li>
+            <li>Honest about metric pitfalls</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Isn’t (yet)</h3>
+          <ul>
+            <li>Production monitoring at continental scale</li>
+            <li>Pixel-perfect segmentation</li>
+            <li>Live Sentinel Hub streaming (next phase)</li>
+            <li>Statistically powered with large n</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="Close with roadmap then ask for questions. If asked 'which model to ship?' — Simple CNN S2 for clear skies; keep S1 / fusion for cloudy ops; RF as a cheap fallback.">
+      <p class="eyebrow">Next</p>
+      <h2>Roadmap</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>More data</h3>
+          <p>Expand beyond 16 patches; cloudy scenes; multi-date change detection.</p>
+        </div>
+        <div class="card">
+          <h3>Real-time fetch</h3>
+          <p>Sentinel Hub / Copernicus API for user-drawn regions of interest.</p>
+        </div>
+        <div class="card">
+          <h3>Segmentation</h3>
+          <p>Train U-Net-style models for pixel masks, not only patch scores.</p>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="slide" data-notes="End. Thank them. Offer to open the compare tab again for questions. Recommend model: Simple CNN S2 for ranking; RF for speed/explainability; S1 when cloudy.">
+      <p class="eyebrow">CanopyWatch</p>
+      <p class="quote">Score the forest. Compare the models. Stay honest about the numbers.</p>
+      <p class="lede" style="margin-top:1.5rem">
+        Demo · <a href="http://127.0.0.1:8000" target="_blank">http://127.0.0.1:8000</a><br />
+        Slides · <a href="/presentation.html">/presentation.html</a> · API · <a href="/docs" target="_blank">/docs</a>
+      </p>
+      <p class="title-meta">Questions?</p>
+    </section>
+
+  </div>
+
+  <div class="notes" id="notes"></div>
+
+  <div class="footer-bar">
+    <div>
+      <button type="button" id="prev">← Prev</button>
+      <button type="button" id="next">Next →</button>
+      <button type="button" id="toggle-notes">Speaker notes (N)</button>
+    </div>
+    <div id="progress">1 / 13 · ← → to navigate · F for fullscreen</div>
+    <div><a href="/" style="color:var(--muted);text-decoration:none">Open app</a></div>
+  </div>
+
+  <script>const slides = [...document.querySelectorAll(".slide")];
+    const notesEl = document.getElementById("notes");
+    let i = 0;
+    let notesOn = false;
+
+    function show(idx) {
+      i = Math.max(0, Math.min(slides.length - 1, idx));
+      slides.forEach((s, k) => s.classList.toggle("active", k === i));
+      document.getElementById("progress").textContent =
+        `${i + 1} / ${slides.length} · ← → to navigate · F for fullscreen`;
+      notesEl.textContent = slides[i].dataset.notes || "";
+      notesEl.innerHTML = `<strong>Speaker notes</strong><br/>${slides[i].dataset.notes || ""}`;
+    }
+
+    document.getElementById("prev").onclick = () => show(i - 1);
+    document.getElementById("next").onclick = () => show(i + 1);
+    document.getElementById("toggle-notes").onclick = () => {
+      notesOn = !notesOn;
+      notesEl.classList.toggle("visible", notesOn);
+    };
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+        e.preventDefault(); show(i + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault(); show(i - 1);
+      } else if (e.key === "n" || e.key === "N") {
+        notesOn = !notesOn;
+        notesEl.classList.toggle("visible", notesOn);
+      } else if (e.key === "f" || e.key === "F") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      } else if (e.key === "Home") show(0);
+      else if (e.key === "End") show(slides.length - 1);
+    });
+
+    show(0);
+</script>
+</body>
+</html>

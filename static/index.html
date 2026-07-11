@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CanopyWatch — Deforestation AI Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <p class="brand-name">CanopyWatch</p>
+        <p class="brand-tag">Multi-model deforestation detector</p>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#detector">Detector</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="/presentation.html" target="_blank" rel="noopener">Presentation</a>
+      <a href="/docs" target="_blank" rel="noopener">API Docs</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Compare deep learning and classical ML on real satellite patches</h1>
+      <p>
+        8 trained models — CNNs on Sentinel-1 / Sentinel-2 plus Random Forest, Logistic Regression, and KNN.
+        Calibrated thresholds keep detections presentation-ready.
+      </p>
+    </section>
+
+    <section id="leaderboard" class="leaderboard-section">
+      <div class="panel leaderboard-panel">
+        <div class="results-header">
+          <h2>Model leaderboard</h2>
+          <span class="badge ok">Demo metrics</span>
+        </div>
+        <div id="leaderboard-table" class="leaderboard-table">
+          <p class="hint">Loading models…</p>
+        </div>
+        <ul id="leaderboard-notes" class="notes"></ul>
+      </div>
+    </section>
+
+    <section id="detector" class="workspace">
+      <aside class="panel controls">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="compare" type="button">Compare models</button>
+          <button class="tab" data-tab="demo" type="button">Single model</button>
+          <button class="tab" data-tab="upload" type="button">Upload</button>
+        </div>
+
+        <form id="compare-form" class="tab-panel active">
+          <label>
+            Satellite patch
+            <select id="compare-patch" name="patch_id" required></select>
+          </label>
+          <p id="compare-meta" class="hint"></p>
+          <p class="hint">
+            Runs CNN + classical ML models side-by-side on the same patch — ideal for slides.
+          </p>
+          <button type="submit" class="btn-primary" id="compare-submit">Run model comparison</button>
+        </form>
+
+        <form id="demo-form" class="tab-panel">
+          <label>
+            Satellite patch
+            <select id="patch-select" name="patch_id" required></select>
+          </label>
+          <p id="patch-meta" class="hint"></p>
+
+          <label>
+            Model
+            <select id="demo-model" name="model_id"></select>
+          </label>
+          <p id="model-blurb" class="hint"></p>
+
+          <label class="check-row">
+            <input id="demo-use-auto" type="checkbox" checked />
+            Use calibrated threshold (recommended)
+          </label>
+
+          <label id="demo-threshold-wrap" hidden>
+            Manual threshold
+            <input id="demo-threshold" type="range" min="0.05" max="0.95" step="0.01" value="0.5" />
+            <span id="demo-threshold-val" class="range-val">0.50</span>
+          </label>
+
+          <button type="submit" class="btn-primary" id="demo-submit">Run detection</button>
+        </form>
+
+        <form id="upload-form" class="tab-panel">
+          <label>
+            Model
+            <select id="upload-model" name="model_id"></select>
+          </label>
+
+          <label class="file-field">
+            Sentinel-2 GeoTIFF (optical)
+            <input id="s2-file" type="file" accept=".tif,.tiff,image/tiff" />
+          </label>
+
+          <label class="file-field">
+            Sentinel-1 GeoTIFF (radar, optional)
+            <input id="s1-file" type="file" accept=".tif,.tiff,image/tiff" />
+          </label>
+
+          <label class="check-row">
+            <input id="upload-use-auto" type="checkbox" checked />
+            Use calibrated threshold
+          </label>
+
+          <p class="hint">
+            Late Fusion / combined models need S1 + S2. Optical-only and radar-only models accept one source.
+          </p>
+
+          <button type="submit" class="btn-primary" id="upload-submit">Analyze upload</button>
+        </form>
+
+        <div id="status" class="status" hidden></div>
+      </aside>
+
+      <div class="panel results">
+        <div class="results-header">
+          <h2>Results</h2>
+          <div id="result-badge" class="badge idle">Waiting</div>
+        </div>
+
+        <div class="stats" id="stats">
+          <div class="stat">
+            <span class="stat-label">Probability</span>
+            <span class="stat-value" id="stat-prob">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Est. rate</span>
+            <span class="stat-value" id="stat-rate">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Threshold</span>
+            <span class="stat-value" id="stat-thr">—</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Ground truth</span>
+            <span class="stat-value" id="stat-gt">—</span>
+          </div>
+        </div>
+
+        <div id="compare-results" class="compare-results" hidden></div>
+
+        <div class="viewer" id="viewer">
+          <div class="viewer-tabs">
+            <button type="button" class="viewer-tab active" data-view="overlay">Heatmap overlay</button>
+            <button type="button" class="viewer-tab" data-view="preview">Satellite preview</button>
+            <button type="button" class="viewer-tab" data-view="map">Map</button>
+          </div>
+          <div id="view-overlay" class="view-pane active">
+            <img id="heatmap-img" alt="Deforestation heatmap overlay" />
+            <p class="empty-state" id="overlay-empty">Run a detection or comparison to see results.</p>
+          </div>
+          <div id="view-preview" class="view-pane">
+            <img id="preview-img" alt="Satellite preview" />
+            <p class="empty-state" id="preview-empty">No preview yet.</p>
+          </div>
+          <div id="view-map" class="view-pane">
+            <div id="map"></div>
+          </div>
+        </div>
+
+        <div class="downloads" id="downloads" hidden>
+          <a id="dl-heatmap" class="btn-secondary" download>Download heatmap PNG</a>
+          <a id="dl-mask" class="btn-secondary" download>Download mask GeoTIFF</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>CanopyWatch — deep CNNs + classical ML on Sentinel-1 radar and Sentinel-2 optical imagery.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+  <script src="/app.js">
+</script>
+</body>
+</html>

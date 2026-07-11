@@ -1,0 +1,346 @@
+{
+  "simplecnn_sentinel2": {
+    "family": "deep_learning",
+    "optimal_threshold": 0.18,
+    "train_f1_at_threshold": 1.0,
+    "val_f1": 1.0,
+    "val_accuracy": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0,
+    "val_corr": 0.9659101333973898,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1
+    },
+    "all_f1_inflated": 1.0,
+    "all_corr": 0.9834532330318536,
+    "calibration_slope": 1.297608419013361,
+    "calibration_intercept": -0.1749490181646199,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    }
+  },
+  "latefusion_combined": {
+    "family": "deep_learning",
+    "optimal_threshold": 0.3499999999999999,
+    "train_f1_at_threshold": 1.0,
+    "val_f1": 0.9090909090909091,
+    "val_accuracy": 0.8333333333333334,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0,
+    "val_corr": 0.7534952873593974,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_f1_inflated": 0.9655172413793104,
+    "all_corr": 0.9011684396865017,
+    "calibration_slope": 3.86007795201923,
+    "calibration_intercept": -1.3009303210861816,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    }
+  },
+  "simplecnn_sentinel1": {
+    "family": "deep_learning",
+    "optimal_threshold": 0.08,
+    "train_f1_at_threshold": 1.0,
+    "val_f1": 0.9090909090909091,
+    "val_accuracy": 0.8333333333333334,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0,
+    "val_corr": 0.7353915394570706,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_f1_inflated": 0.9655172413793104,
+    "all_corr": 0.8538113650206146,
+    "calibration_slope": 1.3526873475513033,
+    "calibration_intercept": -0.1004508126158182,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    }
+  },
+  "robustbaseline_combined": {
+    "family": "deep_learning",
+    "optimal_threshold": 0.05,
+    "train_f1_at_threshold": 0.9473684210526316,
+    "val_f1": 0.9090909090909091,
+    "val_accuracy": 0.8333333333333334,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0,
+    "val_corr": 0.49920738730567166,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_f1_inflated": 0.9333333333333333,
+    "all_corr": 0.6452293766150128,
+    "calibration_slope": 13.586717526575505,
+    "calibration_intercept": -7.067055670319328,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    }
+  },
+  "randomforest_combined": {
+    "family": "classical_ml",
+    "optimal_threshold": 0.5,
+    "val_f1": 1.0,
+    "val_accuracy": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0,
+    "val_corr": 0.8845022481143114,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1
+    },
+    "all_f1_inflated": 1.0,
+    "all_corr": 0.7679677068148096,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    },
+    "loo_f1": 1.0,
+    "loo_accuracy": 1.0,
+    "loo_corr": 0.8245914234752254
+  },
+  "logisticregression_combined": {
+    "family": "classical_ml",
+    "optimal_threshold": 0.5,
+    "val_f1": 1.0,
+    "val_accuracy": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0,
+    "val_corr": 0.7655310917600201,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1
+    },
+    "all_f1_inflated": 1.0,
+    "all_corr": 0.6651659177429259,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    },
+    "loo_f1": 1.0,
+    "loo_accuracy": 1.0,
+    "loo_corr": 0.7541182156446815
+  },
+  "knn_combined": {
+    "family": "classical_ml",
+    "optimal_threshold": 0.5,
+    "val_f1": 0.9090909090909091,
+    "val_accuracy": 0.8333333333333334,
+    "val_precision": 0.8333333333333334,
+    "val_recall": 1.0,
+    "val_corr": 0.7277174517065401,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_f1_inflated": 0.9655172413793104,
+    "all_corr": 0.5374140954190727,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    },
+    "loo_f1": 0.9333333333333333,
+    "loo_accuracy": 0.875,
+    "loo_corr": 0.7817132943667277
+  },
+  "randomforest_sentinel2": {
+    "family": "classical_ml",
+    "optimal_threshold": 0.5,
+    "val_f1": 1.0,
+    "val_accuracy": 1.0,
+    "val_precision": 1.0,
+    "val_recall": 1.0,
+    "val_corr": 0.9025403101459043,
+    "val_n": 6,
+    "val_confusion": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1
+    },
+    "all_f1_inflated": 1.0,
+    "all_corr": 0.7746341557269288,
+    "split": {
+      "train": [
+        11,
+        13,
+        2,
+        14,
+        7,
+        10,
+        4,
+        3,
+        15,
+        0
+      ],
+      "val": [
+        6,
+        9,
+        12,
+        5,
+        8,
+        1
+      ]
+    },
+    "loo_f1": 1.0,
+    "loo_accuracy": 1.0,
+    "loo_corr": 0.8104315068134612
+  }
+}

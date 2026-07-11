@@ -1,0 +1,37 @@
+{
+  "model_name": "randomforest_combined",
+  "all": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "corr": 0.7679677068148096
+  },
+  "val": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "corr": 0.8845022481143114
+  },
+  "train_indices": [
+    11,
+    13,
+    2,
+    14,
+    7,
+    10,
+    4,
+    3,
+    15,
+    0
+  ],
+  "val_indices": [
+    6,
+    9,
+    12,
+    5,
+    8,
+    1
+  ]
+}
